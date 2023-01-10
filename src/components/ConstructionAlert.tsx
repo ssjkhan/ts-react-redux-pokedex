@@ -6,19 +6,14 @@ function ConstructionAlert(props: any) {
 	const showRef = useRef(false);
 	const [show, setShow] = useState(showRef.current);
 
-	const updateShow = (val: boolean) => {
+	function updateShow(val: boolean) {
 		showRef.current = val;
 		setShow(val);
-	};
-
-	const alertStyles: CSS.Properties = {
-		position: "absolute",
-		zIndex: 999,
-	};
+	}
 
 	useEffect(() => {
 		props.onMount([show, updateShow]);
-	}, []);
+	});
 
 	useEffect(() => {
 		if (show) {
@@ -28,11 +23,21 @@ function ConstructionAlert(props: any) {
 			}, 2000);
 		}
 	}, [showRef.current]);
+	const wrapperStyle: CSS.Properties = {
+		position: "fixed",
+		marginLeft: "auto",
+		marginRight: "auto",
+		width: "100%",
+		zIndex: 999,
+	};
 
+	const alertStyle: CSS.Properties = {};
 	return (
 		<Fade in={show}>
-			<div className="alert alert-primary d-flex justify-content-center position-absolute top-50 start-50 translate-middle ">
-				This functionality is still under construction. Stay tuned for more!
+			<div style={wrapperStyle}>
+				<div className="alert alert-dark d-flex justify-content-center">
+					This functionality is still under construction. Stay tuned for more!
+				</div>
 			</div>
 		</Fade>
 	);
