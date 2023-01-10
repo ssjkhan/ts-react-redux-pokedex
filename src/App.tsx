@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import TopBar from "./components/Topbar";
 import PokeDisplay from "./components/PokeDisplay";
 import ConstructionAlert from "./components/ConstructionAlert";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+
 import "./styles/css/styles.css";
 
 function App() {
@@ -30,6 +32,9 @@ function App() {
 						<PokeDisplay
 							key={index + 1}
 							number={index + 1}
+							underCon={() => {
+								setShow(true);
+							}}
 						/>
 					))}
 				</div>
