@@ -1,0 +1,12 @@
+@keyframes spin-Poke {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(359deg);
+	}
+}
+
+#poke-Logo {
+	animation: spin-Poke 5s linear infinite;
+}
