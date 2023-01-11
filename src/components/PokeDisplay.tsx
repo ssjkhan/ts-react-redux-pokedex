@@ -78,24 +78,16 @@ function PokeDisplay(props: Props) {
                       </div>
                     </div>
                     <div className="row no-gutters d-flex align-items-center justify-content-center">
-                      <PokeStats onMount={onMountStats} stats={data.stats} />
+                      <PokeStats
+                        number={props.number}
+                        onMount={onMountStats}
+                        stats={data.stats}
+                      />
                     </div>
                   </>
                 )
                 : null}
             </div>
-
-            {
-              /*
-            <div className="row no-gutters d-flex justify-content-end">
-              //{" "}
-              <i className="fa-solid fa-ellipsis w-auto ">
-                //
-              </i>
-            </div>
-
-            */
-            }
           </div>
         </div>
       </div>

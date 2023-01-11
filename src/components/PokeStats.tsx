@@ -5,9 +5,10 @@ function PokeStats(props: any) {
   return (
     <>
       <div className="container">
-        {props.stats.map((stat: any) => (
+        {props.stats.map((stat: any, index: number) => (
           <PokeStat
-            {...{ name: "Stat", val: 55, onMount: props.onMount, stat: stat }}
+            key={`pokeNumber${props.number}-${index}`}
+            {...{ onMount: props.onMount, stat: stat }}
           />
         ))}
       </div>

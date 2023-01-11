@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ProgressBar } from "react-bootstrap";
 import "./pokeStat.css";
-
+import CSS from "csstype";
 function PokeStat(props: any) {
   const [isGray, setGray] = useState(true);
 
@@ -40,7 +40,14 @@ function PokeStat(props: any) {
     }
     return className;
   };
+
   const statVal = Math.floor(Number(props.stat.base_stat) / 125 * 100);
+
+  const barStyle: CSS.Properties = {
+    width: `${statVal}%`,
+    maxHeight: `100%`,
+    borderRadius: "0.25rem",
+  };
 
   useEffect(() => {
     props.onMount(setGray);
@@ -51,10 +58,13 @@ function PokeStat(props: any) {
       <div className="col-xl-3 col-2 text-capitalize mx-0 px-0">
         {mapStatName(props.stat.stat.name)}
       </div>
-      <div className="col-xl-3 col-8 mx-0 px-0 my-1">
-        <ProgressBar
-          now={statVal}
-        />
+      <div className="col-xl-6 col-8 mx-0 px-0 my-1">
+        <div
+          className={isGray ? "bg-gray" : "bg-color"}
+          style={barStyle}
+        >
+          <div className={isGray ? "child-gray" : "child-color"}>-</div>
+        </div>
       </div>
 
       <div className="col-xl-3 col-2 text-end mx-0 px-0">

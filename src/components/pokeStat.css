@@ -1,3 +1,16 @@
 .bg-gray {
 	background: var(--bs-dark);
 }
+
+
+.bg-color {
+	background: var(--bs-primary)
+}
+
+.child-gray {
+	color: var(--bs-dark);
+}
+
+.child-color {
+	color: var(--bs-primary)
+}
