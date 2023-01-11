@@ -3,6 +3,7 @@ import { useGetPokemonByNumberQuery } from "../services/pokeApi";
 import CSS from "csstype";
 import PokeStats from "./PokeStats";
 import PokeLogo from "./PokeLogo";
+import PokeSprite from "./PokeSprite";
 import "./pokeDisplay.css";
 
 interface Props {
@@ -65,9 +66,9 @@ function PokeDisplay(props: Props) {
 									<PokeLogo />
 								) : data ? (
 									<>
-										<img
-											className="pokeImg pokeCard"
-											src={data.sprites.front_default}
+										<PokeSprite
+											sprite={data.sprites.front_default}
+											onMount={onMountPicture}
 										/>
 									</>
 								) : null}
