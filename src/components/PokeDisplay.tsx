@@ -7,90 +7,100 @@ import PokeSprite from "./PokeSprite";
 import "./pokeDisplay.css";
 
 interface Props {
-	number: number;
-	underCon: Function;
+  number: number;
+  underCon: Function;
 }
 
 function PokeDisplay(props: Props) {
-	const { data, error, isLoading } = useGetPokemonByNumberQuery(props.number);
+  const { data, error, isLoading } = useGetPokemonByNumberQuery(props.number);
 
-	// Get handles on bar and image isHover state
-	let grayStatsArr: Function[] = [];
-	let updateGrayStats = (val: boolean) => {
-		grayStatsArr.forEach((stat) => {
-			stat(val);
-		});
-	};
+  // Get handles on bar and image isHover state
+  let grayStatsArr: Function[] = [];
+  let updateGrayStats = (val: boolean) => {
+    grayStatsArr.forEach((stat) => {
+      stat(val);
+    });
+  };
 
-	let updateGrayPicture = (val: boolean) => {};
+  let updateGrayPicture = (val: boolean) => {};
 
-	const onMountStats = (fromStats: any) => {
-		grayStatsArr.push(fromStats);
-	};
+  const onMountStats = (fromStats: any) => {
+    grayStatsArr.push(fromStats);
+  };
 
-	const onMountPicture = (fromPicture: any) => {
-		updateGrayPicture = fromPicture;
-	};
+  const onMountPicture = (fromPicture: any) => {
+    updateGrayPicture = fromPicture;
+  };
 
-	// function to update isHover state
-	const changeGrayScale = (val: boolean) => {
-		updateGrayPicture(val);
-		updateGrayStats(val);
-	};
+  // function to update isHover state
+  const changeGrayScale = (val: boolean) => {
+    updateGrayPicture(val);
+    updateGrayStats(val);
+  };
 
-	const onMouseEnter = () => {
-		changeGrayScale(false);
-	};
+  const onMouseEnter = () => {
+    changeGrayScale(false);
+  };
 
-	const onMouseExit = () => {
-		changeGrayScale(true);
-	};
+  const onMouseExit = () => {
+    changeGrayScale(true);
+  };
 
-	return (
-		<>
-			<div
-				className="col-xl-3 col-md-6 mb-4"
-				onMouseEnter={() => onMouseEnter()}
-				onMouseLeave={() => onMouseExit()}
-			>
-				<div className="card border-left-dark border-top- shadow h-100 py-2 mw-100 mh-100 ">
-					<div className="card-body">
-						<div className="row no-gutters d-flex align-items-center justify-content-center">
-							<div
-								id="pokePicture"
-								className="col-6 d-flex align-items-center justify-content-center"
-							>
-								{error ? (
-									<>Oh no, there was an error</>
-								) : isLoading ? (
-									<PokeLogo />
-								) : data ? (
-									<>
-										<PokeSprite
-											sprite={data.sprites.front_default}
-											onMount={onMountPicture}
-										/>
-									</>
-								) : null}
-							</div>
-						</div>
+  return (
+    <>
+      <div
+        onClick={() => props.underCon()}
+        className="col-xl-3 col-md-6 mb-4"
+        onMouseEnter={() => onMouseEnter()}
+        onMouseLeave={() => onMouseExit()}
+      >
+        <div className="card border-left-dark border-top- shadow h-100 py-2 mw-100 mh-100 ">
+          <div className="card-body">
+            <div className="row no-gutters d-flex align-items-center justify-content-center">
+              {error
+                ? <>Oh no, there was an error</>
+                : isLoading
+                ? <PokeLogo />
+                : data
+                ? (
+                  <>
+                    <div className="row no-gutters d-flex align-items-center justify-content-center">
+                      <div
+                        id="pokePicture"
+                        className="col-6 d-flex align-items-center justify-content-center"
+                      >
+                        <PokeSprite
+                          isError={error}
+                          isLoading={isLoading}
+                          sprite={data.sprites.front_default}
+                          onMount={onMountPicture}
+                        />
+                      </div>
+                    </div>
+                    <div className="row no-gutters d-flex align-items-center justify-content-center">
+                      <PokeStats onMount={onMountStats} stats={data.stats} />
+                    </div>
+                  </>
+                )
+                : null}
+            </div>
 
-						<div className="row no-gutters d-flex align-items-center justify-content-center">
-							<PokeStats onMount={onMountStats} />
-						</div>
-						<div className="row no-gutters d-flex justify-content-end">
-							<i
-								className="fa-solid fa-ellipsis w-auto "
-								onClick={() => {
-									props.underCon();
-								}}
-							></i>
-						</div>
-					</div>
-				</div>
-			</div>
-		</>
-	);
+            {
+              /*
+            <div className="row no-gutters d-flex justify-content-end">
+              //{" "}
+              <i className="fa-solid fa-ellipsis w-auto ">
+                //
+              </i>
+            </div>
+
+            */
+            }
+          </div>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default PokeDisplay;
