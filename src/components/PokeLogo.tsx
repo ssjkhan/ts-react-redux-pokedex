@@ -5,11 +5,10 @@ import CSS from "csstype";
 type Props = {
 	height?: string;
 	width?: string;
-	underCon: Function;
+	underCon: Function | null;
 };
 
 function PokeLogo(props: Props | any) {
-	console.log(props);
 	const height = props.height;
 	const width = props.width;
 
@@ -24,7 +23,6 @@ function PokeLogo(props: Props | any) {
 			id="poke-Logo"
 			src={logo}
 			style={logoStyle}
-			alt="spinning pokeball"
 		></img>
 	);
 }
