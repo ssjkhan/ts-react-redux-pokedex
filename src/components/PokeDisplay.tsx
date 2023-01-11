@@ -45,7 +45,6 @@ function PokeDisplay(props: Props) {
   const onMouseExit = () => {
     changeGrayScale(true);
   };
-
   return (
     <>
       <div
