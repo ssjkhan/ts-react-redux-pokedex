@@ -8,9 +8,12 @@
 
 </div>
 
+![](https://github.com/ssjkhan/ts-react-redux-pokedex/blob/main/images/vid1.gif)
+
 - Fullstack development exercise exploring the use of TypeScript, React, Redux,
   Sass, Bootstrap, and Jest
-- Consumes third party [pokeAPI](https://pokeapi.co/docs/vw) for pokemon data
+- Consumes third party [pokeAPI](https://pokeapi.co/docs/v2#pokemon-section) for
+  pokemon data
 - Testing done with
 
 ### Completed Features
