@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useGetPokemonByNumberQuery } from "../services/pokeApi";
 import CSS from "csstype";
 import PokeStats from "./PokeStats";
@@ -45,10 +45,22 @@ function PokeDisplay(props: Props) {
   const onMouseExit = () => {
     changeGrayScale(true);
   };
+
+  const myRef = useRef<HTMLDivElement>(null);
+
+  const onClick = (event: React.SyntheticEvent) => {
+    event.preventDefault();
+    props.underCon();
+    if (myRef.current) {
+      myRef.current.scrollIntoView();
+    }
+  };
+
   return (
     <>
       <div
-        onClick={() => props.underCon()}
+        ref={myRef}
+        onClick={(e) => onClick(e)}
         className="col-xl-3 col-md-6 mb-4"
         onMouseEnter={() => onMouseEnter()}
         onMouseLeave={() => onMouseExit()}
