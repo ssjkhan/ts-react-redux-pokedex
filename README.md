@@ -14,7 +14,6 @@
   Sass, Bootstrap, and Jest
 - Consumes third party [pokeAPI](https://pokeapi.co/docs/v2#pokemon-section) for
   pokemon data
-- Testing done with
 
 ### Completed Features
 
@@ -40,6 +39,7 @@
 
 ##### Functionality
 
+- Create testing framework and integrate with github
 - Add pokemon detail tabs for each pokemon
 - Link to evolutions when selected
 - Define explicit types for pokemon objects
