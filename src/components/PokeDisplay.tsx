@@ -50,9 +50,11 @@ function PokeDisplay(props: Props) {
 
   const onClick = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    props.underCon();
     if (myRef.current) {
-      myRef.current.scrollIntoView();
+      myRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
     }
   };
 
@@ -94,6 +96,15 @@ function PokeDisplay(props: Props) {
                         onMount={onMountStats}
                         stats={data.stats}
                       />
+                    </div>
+                    <div className="row no-gutters d-flex align-items-bottom justify-content-center mt-3 ">
+                      <div className="d-flex align-items-bottom justify-content-center">
+                        <i
+                          onClick={() => props.underCon()}
+                          className="fa-solid fa-bars"
+                        >
+                        </i>
+                      </div>
                     </div>
                   </>
                 )
