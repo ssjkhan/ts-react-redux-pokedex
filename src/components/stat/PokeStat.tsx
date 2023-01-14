@@ -24,7 +24,7 @@ function PokeStat(props: any) {
     }
   };
 
-  const statVal = Math.floor(Number(props.stat.base_stat) / 125 * 100);
+  const statVal = Math.floor(Number(props.stat.base_stat) / 160 * 100);
 
   const barStyle: CSS.Properties = {
     width: `${statVal}%`,
@@ -41,7 +41,7 @@ function PokeStat(props: any) {
       <div className="col-xl-3 col-2 text-capitalize mx-0 px-0">
         {mapStatName(props.stat.stat.name)}
       </div>
-      <div className="col-xl-6 col-8 mx-0 px-0 my-1">
+      <div className="col-xl-7 col-9 mx-0 px-0 my-1">
         <div className="m-0 p-0">
           <div
             className={isGray ? "bg-gray child-gray" : "bg-color child-color"}
@@ -52,7 +52,7 @@ function PokeStat(props: any) {
         </div>
       </div>
 
-      <div className="col-xl-3 col-2 text-end mx-0 px-0">
+      <div className="col-xl-2 col-1 text-end mx-0 px-0">
         {props.stat.base_stat}
       </div>
     </div>

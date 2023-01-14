@@ -1,10 +1,8 @@
 import React, { useRef } from "react";
-import { useGetPokemonByNumberQuery } from "../services/pokeApi";
-import CSS from "csstype";
-import PokeStats from "./PokeStats";
-import PokeLogo from "./PokeLogo";
-import PokeSprite from "./PokeSprite";
-import "./pokeDisplay.css";
+import { useGetPokemonByNumberQuery } from "../../services/pokeApi";
+import PokeStats from "../stat/PokeStats";
+import PokeLogo from "../PokeLogo";
+import PokeSprite from "../sprite/PokeSprite";
 
 interface Props {
   number: number;
@@ -49,7 +47,6 @@ function PokeDisplay(props: Props) {
   const myRef = useRef<HTMLDivElement>(null);
 
   const onClick = (event: React.SyntheticEvent) => {
-    event.preventDefault();
     if (myRef.current) {
       myRef.current.scrollIntoView({
         behavior: "smooth",
