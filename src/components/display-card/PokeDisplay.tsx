@@ -46,7 +46,7 @@ function PokeDisplay(props: Props) {
 
   const myRef = useRef<HTMLDivElement>(null);
 
-  const onClick = (event: React.SyntheticEvent) => {
+  const onClickCard = (event: React.SyntheticEvent) => {
     if (myRef.current) {
       myRef.current.scrollIntoView({
         behavior: "smooth",
@@ -59,7 +59,7 @@ function PokeDisplay(props: Props) {
     <>
       <div
         ref={myRef}
-        onClick={(e) => onClick(e)}
+        onClick={(e) => onClickCard(e)}
         className="col-xl-3 col-md-6 mb-4"
         onMouseEnter={() => onMouseEnter()}
         onMouseLeave={() => onMouseExit()}
@@ -97,7 +97,10 @@ function PokeDisplay(props: Props) {
                     <div className="row no-gutters d-flex align-items-bottom justify-content-center mt-3 ">
                       <div className="d-flex align-items-bottom justify-content-center">
                         <i
-                          onClick={() => props.underCon()}
+                          onClick={(e) => {
+                            props.underCon();
+                            onClickCard(e);
+                          }}
                           className="fa-solid fa-bars"
                         >
                         </i>
