@@ -1,8 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useGetPokemonByNumberQuery } from "../../services/pokeApi";
 import PokeStats from "../stat/PokeStats";
 import PokeLogo from "../PokeLogo";
 import PokeSprite from "../sprite/PokeSprite";
+import FrontDisplay from "./FrontDisplay";
+import BackDisplay from "./BackDisplay";
 
 interface Props {
   number: number;
@@ -11,7 +13,7 @@ interface Props {
 
 function PokeDisplay(props: Props) {
   const { data, error, isLoading } = useGetPokemonByNumberQuery(props.number);
-
+  const [isFront, setFront] = useState(true);
   // Get handles on bar and image isHover state
   let grayStatsArr: Function[] = [];
   let updateGrayStats = (val: boolean) => {
@@ -42,6 +44,7 @@ function PokeDisplay(props: Props) {
 
   const onMouseExit = () => {
     changeGrayScale(true);
+    // setFront(true);
   };
 
   const myRef = useRef<HTMLDivElement>(null);
@@ -72,43 +75,36 @@ function PokeDisplay(props: Props) {
                 : isLoading
                 ? <PokeLogo />
                 : data
-                ? (
-                  <>
-                    <div className="row no-gutters d-flex align-items-center justify-content-center">
-                      <div
-                        id="pokePicture"
-                        className="col-6 d-flex align-items-center justify-content-center"
-                      >
-                        <PokeSprite
-                          isError={error}
-                          isLoading={isLoading}
-                          sprite={data.sprites.front_default}
-                          onMount={onMountPicture}
-                        />
-                      </div>
-                    </div>
-                    <div className="row no-gutters d-flex align-items-center justify-content-center">
-                      <PokeStats
-                        number={props.number}
-                        onMount={onMountStats}
-                        stats={data.stats}
-                      />
-                    </div>
-                    <div className="row no-gutters d-flex align-items-bottom justify-content-center mt-3 ">
-                      <div className="d-flex align-items-bottom justify-content-center">
-                        <i
-                          onClick={(e) => {
-                            props.underCon();
-                            onClickCard(e);
-                          }}
-                          className="fa-solid fa-bars"
-                        >
-                        </i>
-                      </div>
-                    </div>
-                  </>
-                )
-                : null}
+                ? isFront
+                  ? (
+                    <FrontDisplay
+                      conAlert={props.underCon}
+                      setFront={setFront}
+                      onMountStats={onMountStats}
+                      stats={data.stats}
+                      onMountPicture={onMountPicture}
+                      isError={error}
+                      isLoading={isLoading}
+                      onClickCard={onClickCard}
+                      sprites={data.sprites}
+                    />
+                  )
+                  : (
+                    <BackDisplay
+                      pokeID={props.number}
+                      conAlert={props.underCon}
+                      setFront={setFront}
+                      onMountStats={onMountStats}
+                      stats={data.stats}
+                      onMountPicture={onMountPicture}
+                      isError={error}
+                      isLoading={isLoading}
+                      onClickCard={onClickCard}
+                      sprites={data.sprites}
+                      data={data}
+                    />
+                  )
+                : <></>}
             </div>
           </div>
         </div>
