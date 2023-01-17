@@ -88,7 +88,7 @@ function PokeDisplay(props: Props) {
 
   const onMouseExit = () => {
     changeGrayScale(true);
-    // setFront(true);
+    setFront(true);
   };
 
   const scrollRef = useRef<HTMLDivElement>(null);
