@@ -92,11 +92,11 @@ function PokeDisplay(props: Props) {
     // setFront(true);
   };
 
-  const myRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const onClickCard = (event: React.SyntheticEvent) => {
-    if (myRef.current) {
-      myRef.current.scrollIntoView({
+    if (scrollRef.current) {
+      scrollRef.current.scrollIntoView({
         behavior: "smooth",
         block: "center",
       });
@@ -106,7 +106,7 @@ function PokeDisplay(props: Props) {
   return (
     <>
       <div
-        ref={myRef}
+        ref={scrollRef}
         onClick={(e) => onClickCard(e)}
         className="col-xl-3 col-md-6 mb-4"
         onMouseEnter={() => onMouseEnter()}
