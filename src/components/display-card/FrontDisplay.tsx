@@ -27,15 +27,15 @@ function FrontDisplay(props: any) {
         />
       </div>
       <div className="row no-gutters d-flex align-items-bottom justify-content-center mt-3 ">
-        <div className="d-flex align-items-bottom justify-content-center">
-          <i
-            onClick={(e) => {
-              props.setFront(false);
-              props.conAlert();
-              // props.onClickCard(e);
-            }}
-            className="fa-solid fa-bars"
-          >
+        <div
+          className="d-flex align-items-bottom justify-content-center"
+          onClick={(e) => {
+            props.setFront(false);
+            props.conAlert();
+            props.onClickCard(e);
+          }}
+        >
+          <i className="fa-solid fa-bars">
           </i>
         </div>
       </div>
