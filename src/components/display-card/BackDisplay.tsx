@@ -2,10 +2,10 @@ import React from "react";
 import { Tab, Tabs } from "react-bootstrap";
 
 function BackDisplay(props: any) {
-  const pokeType = props.data.types.map((type: any) => {
+  const pokeType = props.pokemonData.types.map((type: any) => {
     return (
       <>
-        <div className="row">
+        <div key={"pokeID-Type" + props.pokeID + type} className="row">
           <div className="col">Type</div>
           <div className="col">
             <span className="text-capitalize">{type.type.name}</span>
@@ -14,6 +14,15 @@ function BackDisplay(props: any) {
       </>
     );
   });
+
+  const processText = (text: String) => {
+    return text.replace(/\n/, " ").replace(/\u000c/, " ");
+  };
+
+  var flavourText = processText(
+    props.speciesData.flavor_text_entries[0].flavor_text,
+  );
+
   return (
     <>
       <Tabs
@@ -34,12 +43,15 @@ function BackDisplay(props: any) {
               <div className="col-auto e-auto">Species</div>
               <div className="col-auto">
                 <span className="text-dark text-capitalize">
-                  <u>{props.data.species.name}</u>
+                  <u>{props.pokemonData.species.name}</u>
                 </span>
               </div>
             </div>
             <div className="row">
               {pokeType}
+            </div>
+            <div className="row">
+              {flavourText}
             </div>
           </div>
         </Tab>
@@ -51,7 +63,7 @@ function BackDisplay(props: any) {
             </span>
           }
         >
-          <div className="bg-primary d-flex flex-row h-100">{pokeType}</div>
+          <div className=""></div>
         </Tab>
       </Tabs>
     </>

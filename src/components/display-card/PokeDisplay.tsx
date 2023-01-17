@@ -89,7 +89,7 @@ function PokeDisplay(props: Props) {
 
   const onMouseExit = () => {
     changeGrayScale(true);
-    setFront(true);
+    // setFront(true);
   };
 
   const myRef = useRef<HTMLDivElement>(null);
@@ -113,7 +113,11 @@ function PokeDisplay(props: Props) {
         onMouseLeave={() => onMouseExit()}
       >
         <div className={isGray ? classNameCardGray : classNameCardColor()}>
-          <div className="card-body">
+          <div
+            className={isGray
+              ? "card-body border border-white border-5 "
+              : "card-body"}
+          >
             <div className="row no-gutters d-flex align-items-center justify-content-center">
               {getPokemonError
                 ? <>Oh no, there was an error</>
