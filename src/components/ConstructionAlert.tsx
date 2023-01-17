@@ -19,10 +19,14 @@ function ConstructionAlert(props: any) {
   };
 
   const styleHidden: CSS.Properties = {
-    display: "none",
+    display: "none !important",
+    pointerEvents: "none",
+    position: "absolute",
+    top: "-9999px !important",
+    left: "-9999px !important",
   };
 
-  var wrapperStyle: CSS.Properties = styleShow;
+  var wrapperStyle: CSS.Properties = show ? styleShow : styleHidden;
 
   useEffect(() => {
     props.onMount([show, updateShow]);
