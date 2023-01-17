@@ -94,6 +94,7 @@ function BackDisplay(props: any) {
         className="mb-3"
       >
         <Tab
+          key={"pokedexTab" + props.pokeID}
           eventKey="pokedexEntry"
           title={
             <span>
@@ -119,6 +120,7 @@ function BackDisplay(props: any) {
           </div>
         </Tab>
         <Tab
+          key={"pokeMovesTab" + props.pokeID}
           eventKey="pokeMoves"
           title={
             <span>
