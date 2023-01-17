@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ts-react-redux-pokedex/static/css/main.e5477533.css",
-    "main.js": "/ts-react-redux-pokedex/static/js/main.702b6711.js",
+    "main.js": "/ts-react-redux-pokedex/static/js/main.6cbd0d83.js",
     "static/js/787.7e0b23c5.chunk.js": "/ts-react-redux-pokedex/static/js/787.7e0b23c5.chunk.js",
     "static/media/fa-solid-900.ttf": "/ts-react-redux-pokedex/static/media/fa-solid-900.b1a653db79258eeccc5d.ttf",
     "static/media/fa-brands-400.ttf": "/ts-react-redux-pokedex/static/media/fa-brands-400.450a5c898f0b184b968b.ttf",
@@ -14,11 +14,11 @@
     "static/media/pokeball.svg": "/ts-react-redux-pokedex/static/media/pokeball.3dbafa59e444d353fb0d8eac04f8cb5d.svg",
     "index.html": "/ts-react-redux-pokedex/index.html",
     "main.e5477533.css.map": "/ts-react-redux-pokedex/static/css/main.e5477533.css.map",
-    "main.702b6711.js.map": "/ts-react-redux-pokedex/static/js/main.702b6711.js.map",
+    "main.6cbd0d83.js.map": "/ts-react-redux-pokedex/static/js/main.6cbd0d83.js.map",
     "787.7e0b23c5.chunk.js.map": "/ts-react-redux-pokedex/static/js/787.7e0b23c5.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e5477533.css",
-    "static/js/main.702b6711.js"
+    "static/js/main.6cbd0d83.js"
   ]
 }
