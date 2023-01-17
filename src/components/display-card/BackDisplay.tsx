@@ -1,5 +1,6 @@
 import React from "react";
 import { Tab, Tabs } from "react-bootstrap";
+import CSS from "csstype";
 
 function BackDisplay(props: any) {
   const pokeType = (function () {
@@ -80,6 +81,11 @@ function BackDisplay(props: any) {
     }
   })();
 
+  const moveWindowStyle: CSS.Properties = {
+    height: `${props.clientHeight * 0.75}`,
+    maxHeight: `${props.clientHeight * 75}`,
+  };
+
   return (
     <>
       <Tabs
@@ -120,7 +126,7 @@ function BackDisplay(props: any) {
             </span>
           }
         >
-          <div className="container-fluid">
+          <div className="container overflow-scroll" style={moveWindowStyle}>
             {pokeMoves}
           </div>
         </Tab>

@@ -1,11 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   useGetPokemonByNumberQuery,
   useGetSpeciesByNumberQuery,
 } from "../../services/pokeApi";
-import PokeStats from "../stat/PokeStats";
 import PokeLogo from "../PokeLogo";
-import PokeSprite from "../sprite/PokeSprite";
 import FrontDisplay from "./FrontDisplay";
 import BackDisplay from "./BackDisplay";
 
@@ -27,6 +25,7 @@ function PokeDisplay(props: Props) {
   } = useGetSpeciesByNumberQuery(props.number);
   const [isFront, setFront] = useState(true);
   const [isGray, setGray] = useState(true);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   const classNameCardGray =
     "card border-left-dark  shadow h-100 py-2 mw-100 mh-100  ";
@@ -114,6 +113,7 @@ function PokeDisplay(props: Props) {
       >
         <div className={isGray ? classNameCardGray : classNameCardColor()}>
           <div
+            ref={cardRef}
             className={isGray
               ? "card-body border border-white border-5 "
               : "card-body"}
