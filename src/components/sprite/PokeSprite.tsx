@@ -3,7 +3,12 @@ import PokeLogo from "../PokeLogo";
 import CSS from "csstype";
 import "./pokeSprite.css";
 
-function PokeSprite(props: any) {
+type IProps = {
+  onMount: Function;
+  sprite: string;
+};
+
+function PokeSprite(props: IProps) {
   const [isGray, setGray] = useState(true);
   const [isLoading, setLoading] = useState(true);
 

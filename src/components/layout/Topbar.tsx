@@ -1,4 +1,3 @@
-import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import PokeLogo from "../PokeLogo";
 import CSS from "csstype";

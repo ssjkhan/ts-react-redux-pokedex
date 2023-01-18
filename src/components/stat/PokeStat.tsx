@@ -1,9 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Collapse } from "react-bootstrap";
+import { useEffect, useState } from "react";
 import "./pokeStat.css";
 import CSS from "csstype";
 
-function PokeStat(props: any) {
+type Prop = {
+  base_stat: number;
+  effort: number;
+  stat: {
+    name: string;
+    url: string;
+  };
+  onMount: Function;
+};
+
+function PokeStat(props: Prop) {
   const [isGray, setGray] = useState(true);
   const mapStatName: (name: string) => string = (name) => {
     switch (name) {
@@ -24,7 +33,7 @@ function PokeStat(props: any) {
     }
   };
 
-  const statVal = Math.floor(Number(props.stat.base_stat) / 160 * 100);
+  const statVal = Math.floor(Number(props.base_stat) / 160 * 100);
 
   const barStyle: CSS.Properties = {
     width: `${statVal}%`,
@@ -39,7 +48,7 @@ function PokeStat(props: any) {
   return (
     <div className="row d-flex flex-row justify-content-between pokeStatRow">
       <div className="col-xl-3 col-2 text-capitalize mx-0 px-0">
-        {mapStatName(props.stat.stat.name)}
+        {mapStatName(props.stat.name)}
       </div>
       <div className="col-xl-7 col-9 mx-0 px-0 my-1">
         <div className="m-0 p-0">
@@ -53,7 +62,7 @@ function PokeStat(props: any) {
       </div>
 
       <div className="col-xl-2 col-1 text-end mx-0 px-0">
-        {props.stat.base_stat}
+        {props.base_stat}
       </div>
     </div>
   );

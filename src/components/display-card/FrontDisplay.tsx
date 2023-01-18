@@ -1,10 +1,19 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import PokeSprite from "../sprite/PokeSprite";
 import PokeStats from "../stat/PokeStats";
+import { Pokemon } from "../../services/pokeApi";
 
-function FrontDisplay(props: any) {
+type Prop = {
+  pokeID: number;
+  pokemonData: Pokemon;
+  onMountPicture: Function;
+  onMountStats: Function;
+  setFront: Function;
+  onClickCard: Function;
+};
+
+function FrontDisplay(props: Prop) {
   const [isGray, setGray] = useState(false);
-  const targetRef = useRef<HTMLElement>(null);
   useEffect(() => {
     props.onMountStats(setGray);
   });
@@ -20,8 +29,6 @@ function FrontDisplay(props: any) {
           className="col-6 d-flex align-items-center justify-content-center"
         >
           <PokeSprite
-            isError={props.isError}
-            isLoading={props.isLoading}
             sprite={props.pokemonData.sprites.front_default}
             onMount={props.onMountPicture}
           />
@@ -39,7 +46,6 @@ function FrontDisplay(props: any) {
           className="d-flex align-items-bottom justify-content-center"
           onClick={(e) => {
             props.setFront(false);
-            // props.conAlert();
             props.onClickCard(e);
           }}
         >
