@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import CSS from "csstype";
 
 function BackDisplay(props: any) {
+  const heightRef = useRef(0);
+  const widthRef = useRef(0);
+  const [height, setHeight] = useState(heightRef.current);
+  const [width, setWidth] = useState(widthRef.current);
+
+  const updateSize = (clientHeight: number, clientWidth: number) => {
+    heightRef.current = clientHeight;
+    widthRef.current = clientWidth;
+    setHeight(clientHeight);
+    setWidth(clientWidth);
+  };
+
+  useEffect(() => {
+    props.onMountSizing(updateSize);
+  });
+
   const pokeType = (function () {
     if (props.pokemonData.types.length < 2) {
       return props.pokemonData.types.map((type: any) => {
@@ -57,10 +73,12 @@ function BackDisplay(props: any) {
       return (
         <>
           <div key={"pokeID-Move" + props.pokeID + move.name} className="row">
-            <div className="col-4 text-capitalize fs-6 mx-0 px-0">
+            <div className="col-4 text-capitalize fs-6 mx-0 pl-1">
               {learnData}
             </div>
-            <div className="col-auto fs-6 mx-0 px-0">{move.move.name}</div>
+            <div className="col-auto fs-6 mx-0 px-0 text-capitalize">
+              {move.move.name}
+            </div>
           </div>
         </>
       );
@@ -81,58 +99,77 @@ function BackDisplay(props: any) {
     }
   })();
 
-  const moveWindowStyle: CSS.Properties = {
-    height: `${props.clientHeight * 0.75}`,
-    maxHeight: `${props.clientHeight * 75}`,
+  const tabContentWindowStyle: CSS.Properties = {
+    height: `${height * 0.7}px`,
+    maxHeight: `${height * 0.7}px`,
+    width: `${width}px`,
+    maxWidth: `${width * 0.9}px`,
+    overflowY: "scroll",
+    overflowX: "hidden",
   };
 
   return (
     <>
-      <Tabs
-        defaultActiveKey="pokedexEntry"
-        id={"pokeID-" + props.pokeID}
-        className="mb-3"
-      >
-        <Tab
-          key={"pokedexTab" + props.pokeID}
-          eventKey="pokedexEntry"
-          title={
-            <span>
-              <i className="fa-solid fa-circle-info"></i>
-            </span>
-          }
+      <div>
+        <Tabs
+          defaultActiveKey="pokedexEntry"
+          id={"pokeID-" + props.pokeID}
+          className="mb-3"
         >
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-5">Species</div>
-              <div className="col">
-                <span className="text-dark text-capitalize">
-                  <u>{props.pokemonData.species.name}</u>
-                </span>
+          <Tab
+            key={"pokedexTab" + props.pokeID}
+            eventKey="pokedexEntry"
+            title={
+              <span>
+                <i className="fa-solid fa-circle-info"></i>
+              </span>
+            }
+          >
+            <div style={tabContentWindowStyle}>
+              <div className="container-fluid">
+                <div className="row">
+                  <div className="col-5">Species</div>
+                  <div className="col">
+                    <span className="text-dark text-capitalize">
+                      <u>{props.pokemonData.species.name}</u>
+                    </span>
+                  </div>
+                </div>
+                {pokeType}
+                <hr />
+                <div className="row">
+                  {flavourText}
+                </div>
               </div>
             </div>
-            {pokeType}
-
-            <hr />
-            <div className="row">
-              {flavourText}
+          </Tab>
+          <Tab
+            key={"pokeMovesTab" + props.pokeID}
+            eventKey="pokeMoves"
+            title={
+              <span>
+                <i className="fa-solid fa-hand-fist"></i>
+              </span>
+            }
+          >
+            <div className="" style={tabContentWindowStyle}>
+              <div className="row">
+                <div className="col-4 fx-6 mx-0 text-dark">
+                  <span>
+                    <u>Level</u>
+                  </span>
+                </div>
+                <div className="col-auto mx-0 px-0">
+                  <span className="text-dark">
+                    <u>Move</u>
+                  </span>
+                </div>
+              </div>
+              {pokeMoves}
             </div>
-          </div>
-        </Tab>
-        <Tab
-          key={"pokeMovesTab" + props.pokeID}
-          eventKey="pokeMoves"
-          title={
-            <span>
-              <i className="fa-solid fa-hand-fist"></i>
-            </span>
-          }
-        >
-          <div className="container overflow-scroll" style={moveWindowStyle}>
-            {pokeMoves}
-          </div>
-        </Tab>
-      </Tabs>
+          </Tab>
+        </Tabs>
+      </div>
     </>
   );
 }
