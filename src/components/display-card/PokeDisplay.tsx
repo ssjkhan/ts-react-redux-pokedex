@@ -62,7 +62,6 @@ function PokeDisplay(props: Props) {
   };
 
   useEffect(() => {
-    console.log(cardRef.current?.clientHeight);
     if (cardRef.current) {
       let { clientHeight, clientWidth } = cardRef.current;
       updateSizingArr(clientHeight, clientWidth);
