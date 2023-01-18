@@ -163,20 +163,22 @@ function BackDisplay(props: Prop) {
               </span>
             }
           >
-            <div className="" style={tabContentWindowStyle}>
-              <div className="row">
-                <div className="col-4 fx-6 mx-0 text-dark">
-                  <span>
-                    <u>Level</u>
-                  </span>
-                </div>
-                <div className="col-auto mx-0 px-0">
-                  <span className="text-dark">
-                    <u>Move</u>
-                  </span>
-                </div>
+            <div className="row">
+              <div className="col-4 fx-6 mx-0 text-dark">
+                <span>
+                  <u>Level</u>
+                </span>
               </div>
-              {pokeMoves}
+              <div className="col-auto mx-0 px-0">
+                <span className="text-dark">
+                  <u>Move</u>
+                </span>
+              </div>
+              <div className="" style={tabContentWindowStyle}>
+                <div className="row">
+                </div>
+                {pokeMoves}
+              </div>
             </div>
           </Tab>
         </Tabs>
