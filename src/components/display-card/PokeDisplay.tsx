@@ -7,12 +7,34 @@ import PokeLogo from "../PokeLogo";
 import FrontDisplay from "./FrontDisplay";
 import BackDisplay from "./BackDisplay";
 
+// typeColorMapping for PokeCard UIs
+const typeColorDict: any = {
+  "normal": "warning",
+  "water": "primary",
+  "fire": "danger",
+  "electric": "warning",
+  "grass": "success",
+  "ice": "info",
+  "fighting": "danger",
+  "poison": "dark",
+  "ground": "warning",
+  "flying": "seconday",
+  "psychic": "info",
+  "bug": "success",
+  "ghost": "dark",
+  "dragon": "primary",
+  "dark": "dark",
+  "steel": "secondary",
+  "fairy": "danger",
+};
+
 interface Props {
   number: number;
   underCon: Function;
 }
 
 function PokeDisplay(props: Props) {
+  // API Queries for card Data
   const {
     data: pokemonData,
     error: getPokemonError,
@@ -23,38 +45,22 @@ function PokeDisplay(props: Props) {
     error: getSpeciesError,
     isLoading: speciesIsLoading,
   } = useGetSpeciesByNumberQuery(props.number);
+
+  // Set Up refs for color and inset height
   const [isFront, setFront] = useState(true);
   const [isGray, setGray] = useState(true);
   const cardRef = useRef<HTMLDivElement>(null);
 
+  // Styling Constants
   const classNameCardGray =
-    "card border-left-dark  shadow h-100 py-2 mw-100 mh-100  ";
+    "card border-left-dark shadow h-100 py-2 mw-100 mh-100  ";
 
-  const typeColorDict: any = {
-    "normal": "warning",
-    "water": "primary",
-    "fire": "danger",
-    "electric": "warning",
-    "grass": "success",
-    "ice": "info",
-    "fighting": "danger",
-    "poison": "dark",
-    "ground": "warning",
-    "flying": "seconday",
-    "psychic": "info",
-    "bug": "success",
-    "ghost": "dark",
-    "dragon": "primary",
-    "dark": "dark",
-    "steel": "secondary",
-    "fairy": "danger",
-  };
   const classNameCardColor = () => {
-    if (!pokemonData) {
+    if (!pokemonData || isGray) {
       return "card border border-dark border-5 shadow h-100 py-2 mw-100 mh-100 ";
     }
     var color = typeColorDict[pokemonData.types[0].type.name];
-    return `card border border-${color} border-5 shadow h-100 py-2 mw-100 mh-100`;
+    return `card border border-${color} border-5 border-top-0 border-right-0 border-bottom-0 shadow h-100 py-2 mw-100 mh-100`;
   };
 
   // Get handles on bar and image isHover state
@@ -67,10 +73,11 @@ function PokeDisplay(props: Props) {
 
   let updateGrayPicture = (val: boolean) => {};
 
+  // callback to get callbacks for child components Gray Handles
   const onMountStats = (fromStats: any) => {
     grayStatsArr.push(fromStats);
   };
-
+  // callback to get handl on sprite grayState
   const onMountPicture = (fromPicture: any) => {
     updateGrayPicture = fromPicture;
   };
@@ -82,6 +89,7 @@ function PokeDisplay(props: Props) {
     setGray(val);
   };
 
+  // Mouse event handlers
   const onMouseEnter = () => {
     changeGrayScale(false);
   };
@@ -91,6 +99,7 @@ function PokeDisplay(props: Props) {
     setFront(true);
   };
 
+  // scrolling event for card
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const onClickCard = (event: React.SyntheticEvent) => {
