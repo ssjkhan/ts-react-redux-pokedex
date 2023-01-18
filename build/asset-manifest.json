@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/ts-react-redux-pokedex/static/css/main.e5477533.css",
+    "main.js": "/ts-react-redux-pokedex/static/js/main.0fa102a8.js",
+    "static/js/787.7e0b23c5.chunk.js": "/ts-react-redux-pokedex/static/js/787.7e0b23c5.chunk.js",
+    "static/media/fa-solid-900.ttf": "/ts-react-redux-pokedex/static/media/fa-solid-900.b1a653db79258eeccc5d.ttf",
+    "static/media/fa-brands-400.ttf": "/ts-react-redux-pokedex/static/media/fa-brands-400.450a5c898f0b184b968b.ttf",
+    "static/media/fa-solid-900.woff2": "/ts-react-redux-pokedex/static/media/fa-solid-900.41c0f706d8ce93933771.woff2",
+    "static/media/fa-brands-400.woff2": "/ts-react-redux-pokedex/static/media/fa-brands-400.3ac6859b28be946745f9.woff2",
+    "static/media/fa-regular-400.ttf": "/ts-react-redux-pokedex/static/media/fa-regular-400.3cd9fb8fcec4ad0f99d4.ttf",
+    "static/media/fa-regular-400.woff2": "/ts-react-redux-pokedex/static/media/fa-regular-400.1f3772178d9e5bed38a6.woff2",
+    "static/media/fa-v4compatibility.ttf": "/ts-react-redux-pokedex/static/media/fa-v4compatibility.e314b618134d5be20996.ttf",
+    "static/media/fa-v4compatibility.woff2": "/ts-react-redux-pokedex/static/media/fa-v4compatibility.4ee7f902d88f819e251c.woff2",
+    "static/media/pokeball.svg": "/ts-react-redux-pokedex/static/media/pokeball.3dbafa59e444d353fb0d8eac04f8cb5d.svg",
+    "index.html": "/ts-react-redux-pokedex/index.html",
+    "main.e5477533.css.map": "/ts-react-redux-pokedex/static/css/main.e5477533.css.map",
+    "main.0fa102a8.js.map": "/ts-react-redux-pokedex/static/js/main.0fa102a8.js.map",
+    "787.7e0b23c5.chunk.js.map": "/ts-react-redux-pokedex/static/js/787.7e0b23c5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e5477533.css",
+    "static/js/main.0fa102a8.js"
+  ]
+}
