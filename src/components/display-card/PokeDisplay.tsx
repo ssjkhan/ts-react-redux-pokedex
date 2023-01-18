@@ -51,6 +51,50 @@ function PokeDisplay(props: Props) {
   const [isGray, setGray] = useState(true);
   const cardRef = useRef<HTMLDivElement>(null);
 
+  // Child Sizing Elements for fixed size children in flex parent
+
+  const childSizingArr: Function[] = [];
+  const updateSizingArr = (height: Number, width: Number) => {
+    childSizingArr.forEach((childSizingFn) => childSizingFn(height, width));
+  };
+  const onMountSizing = (fn: Function) => {
+    childSizingArr.push(fn);
+  };
+
+  useEffect(() => {
+    console.log(cardRef.current?.clientHeight);
+    if (cardRef.current) {
+      let { clientHeight, clientWidth } = cardRef.current;
+      updateSizingArr(clientHeight, clientWidth);
+    }
+  });
+
+  // Get handles on bar and image isHover state
+  const grayChildFnArr: Function[] = [];
+  const updateGrayChild = (val: boolean) => {
+    grayChildFnArr.forEach((stat) => {
+      stat(val);
+    });
+  };
+
+  let updateGrayPicture: Function = () => {};
+
+  // callback to get callbacks for child components Gray Handles
+  const onMountGray = (fn: Function) => {
+    grayChildFnArr.push(fn);
+  };
+  // callback to get handl on sprite grayState
+  const onMountPicture = (fn: Function) => {
+    updateGrayPicture = fn;
+  };
+
+  // function to update isHover state
+  const changeGrayScale = (val: boolean) => {
+    updateGrayPicture(val);
+    updateGrayChild(val);
+    setGray(val);
+  };
+
   // Styling Constants
   const classNameCardGray =
     "card border-left-dark shadow h-100 py-2 mw-100 mh-100  ";
@@ -60,33 +104,7 @@ function PokeDisplay(props: Props) {
       return "card border border-dark border-5 shadow h-100 py-2 mw-100 mh-100 ";
     }
     var color = typeColorDict[pokemonData.types[0].type.name];
-    return `card border border-${color} border-5 border-top-0 border-right-0 border-bottom-0 shadow h-100 py-2 mw-100 mh-100`;
-  };
-
-  // Get handles on bar and image isHover state
-  let grayStatsArr: Function[] = [];
-  let updateGrayStats = (val: boolean) => {
-    grayStatsArr.forEach((stat) => {
-      stat(val);
-    });
-  };
-
-  let updateGrayPicture = (val: boolean) => {};
-
-  // callback to get callbacks for child components Gray Handles
-  const onMountStats = (fromStats: any) => {
-    grayStatsArr.push(fromStats);
-  };
-  // callback to get handl on sprite grayState
-  const onMountPicture = (fromPicture: any) => {
-    updateGrayPicture = fromPicture;
-  };
-
-  // function to update isHover state
-  const changeGrayScale = (val: boolean) => {
-    updateGrayPicture(val);
-    updateGrayStats(val);
-    setGray(val);
+    return `card border border-${color} border-5  shadow h-100 py-2 mw-100 mh-100`;
   };
 
   // Mouse event handlers
@@ -143,7 +161,7 @@ function PokeDisplay(props: Props) {
                       onClickCard={onClickCard}
                       conAlert={props.underCon}
                       setFront={setFront}
-                      onMountStats={onMountStats}
+                      onMountStats={onMountGray}
                       onMountPicture={onMountPicture}
                     />
                   )
@@ -155,11 +173,11 @@ function PokeDisplay(props: Props) {
                       isLoading={pokemonIsLoading && speciesIsLoading}
                       isError={getPokemonError && getSpeciesError}
                       Error={{ getPokemonError, getSpeciesError }}
-                      stats={pokemonData.stats}
                       conAlert={props.underCon}
                       setFront={setFront}
                       onMountPicture={onMountPicture}
-                      onMountStats={onMountStats}
+                      onMountStats={onMountGray}
+                      onMountSizing={onMountSizing}
                       onClickCard={onClickCard}
                     />
                   )
