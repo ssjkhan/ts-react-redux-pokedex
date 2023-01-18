@@ -39,7 +39,7 @@ function FrontDisplay(props: any) {
           className="d-flex align-items-bottom justify-content-center"
           onClick={(e) => {
             props.setFront(false);
-            props.conAlert();
+            // props.conAlert();
             props.onClickCard(e);
           }}
         >
