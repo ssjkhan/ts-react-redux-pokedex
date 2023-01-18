@@ -1,11 +1,55 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export interface Pokemon {
+export type Pokemon = {
   species: {
     name: string;
+    url: string;
   };
-  sprites: { front_shiny: any };
-}
+  sprites: {
+    front_default: string;
+    [x: string | number | symbol]: unknown;
+  };
+  types: {
+    slot: number;
+    type: {
+      name: string;
+      url: string;
+    };
+  }[];
+  stats: {
+    base_stat: number;
+    effort: number;
+    stat: {
+      name: string;
+      url: string;
+    };
+  }[];
+  moves: {
+    move: {
+      name: string;
+      url: string;
+    };
+    version_group_details: {
+      level_learned_at: number;
+      move_learn_method: {
+        name: string;
+        url: string;
+      };
+    }[];
+  }[];
+  [x: string | number | symbol]: unknown;
+};
+
+export type Species = {
+  name: string;
+  flavor_text_entries: {
+    flavor_text: string;
+    language: {
+      name: string;
+      url: string;
+    };
+  }[];
+};
 
 export const pokeApi = createApi({
   reducerPath: "pokeApi",
@@ -13,16 +57,13 @@ export const pokeApi = createApi({
     baseUrl: "https://pokeapi.co/api/v2/",
   }),
   endpoints: (builder) => ({
-    testEndPoint: builder.query<any, string>({
-      query: () => `pokemon/bulbasaur`,
-    }),
-    getPokemonByName: builder.query<any, string>({
+    getPokemonByName: builder.query<Pokemon, string>({
       query: (name) => `pokemon/${name}`,
     }),
-    getPokemonByNumber: builder.query<any, number>({
+    getPokemonByNumber: builder.query<Pokemon, number>({
       query: (number) => `pokemon/${number}`,
     }),
-    getSpeciesByNumber: builder.query<any, number>({
+    getSpeciesByNumber: builder.query<Species, number>({
       query: (number) => `pokemon-species/${number}`,
     }),
   }),
@@ -31,7 +72,6 @@ export const pokeApi = createApi({
 export const {
   useGetPokemonByNameQuery,
   useGetPokemonByNumberQuery,
-  useTestEndPointQuery,
   useGetSpeciesByNumberQuery,
 } = pokeApi;
 

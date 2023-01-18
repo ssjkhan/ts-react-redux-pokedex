@@ -1,8 +1,17 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Tab, Tabs } from "react-bootstrap";
 import CSS from "csstype";
+import { Pokemon, Species } from "../../services/pokeApi";
 
-function BackDisplay(props: any) {
+type Prop = {
+  pokeID: number;
+  pokemonData: Pokemon;
+  speciesData: Species;
+
+  onMountSizing: Function;
+};
+
+function BackDisplay(props: Prop) {
   const heightRef = useRef(0);
   const widthRef = useRef(0);
   const [height, setHeight] = useState(heightRef.current);
@@ -56,11 +65,13 @@ function BackDisplay(props: any) {
   })();
 
   const pokeMoves = (function () {
-    var moves = [].concat(props.pokemonData.moves).sort((a: any, b: any) => {
-      var lvlA = a.version_group_details[0].level_learned_at;
-      var lvlB = b.version_group_details[0].level_learned_at;
-      return (lvlA < lvlB ? -1 : 1);
-    });
+    const moves = Object.assign([], props.pokemonData.moves).sort(
+      (a: any, b: any) => {
+        var lvlA = a.version_group_details[0].level_learned_at;
+        var lvlB = b.version_group_details[0].level_learned_at;
+        return (lvlA < lvlB ? -1 : 1);
+      },
+    );
 
     return moves.map((move: any) => {
       var methodDetails = move.version_group_details[0];

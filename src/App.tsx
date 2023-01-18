@@ -6,9 +6,9 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./styles/css/styles.css";
 
 function App() {
-  let setShow: any = null;
+  let setShow: Function = () => {};
 
-  const onAlertMount = (dataFromAlert: any) => {
+  const onAlertMount = (dataFromAlert: Function[]) => {
     setShow = dataFromAlert[1];
   };
 

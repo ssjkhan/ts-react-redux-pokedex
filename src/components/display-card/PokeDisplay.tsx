@@ -62,7 +62,6 @@ function PokeDisplay(props: Props) {
   };
 
   useEffect(() => {
-    console.log(cardRef.current?.clientHeight);
     if (cardRef.current) {
       let { clientHeight, clientWidth } = cardRef.current;
       updateSizingArr(clientHeight, clientWidth);
@@ -156,31 +155,22 @@ function PokeDisplay(props: Props) {
                     <FrontDisplay
                       pokeID={props.number}
                       pokemonData={pokemonData}
-                      isError={getPokemonError}
-                      isLoading={pokemonIsLoading}
                       onClickCard={onClickCard}
-                      conAlert={props.underCon}
                       setFront={setFront}
                       onMountStats={onMountGray}
                       onMountPicture={onMountPicture}
                     />
                   )
-                  : (
+                  : speciesData
+                  ? (
                     <BackDisplay
                       pokeID={props.number}
                       pokemonData={pokemonData}
                       speciesData={speciesData}
-                      isLoading={pokemonIsLoading && speciesIsLoading}
-                      isError={getPokemonError && getSpeciesError}
-                      Error={{ getPokemonError, getSpeciesError }}
-                      conAlert={props.underCon}
-                      setFront={setFront}
-                      onMountPicture={onMountPicture}
-                      onMountStats={onMountGray}
                       onMountSizing={onMountSizing}
-                      onClickCard={onClickCard}
                     />
                   )
+                  : <></>
                 : <></>}
             </div>
           </div>

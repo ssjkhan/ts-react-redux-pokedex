@@ -2,7 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { Fade } from "react-bootstrap";
 import CSS from "csstype";
 
-function ConstructionAlert(props: any) {
+type Props = {
+  onMount: Function;
+};
+
+function ConstructionAlert(props: Props) {
   const showRef = useRef(false);
   const [show, setShow] = useState(showRef.current);
 
